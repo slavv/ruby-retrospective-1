@@ -1,13 +1,6 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 
-class Integer
-  def ordinal
-    sufix = %w{ th st nd rd th th th th th th }
-    to_s + (self / 10 == 1 ? 'th' : sufix[self % 10])
-  end
-end
-
 class Inventory
   attr_reader :products, :coupons
 
@@ -123,7 +116,10 @@ module Promotion
     end
     
     def name
-      "#{@percents_discount}% off of every after the #{@product_count.ordinal}"
+      sufix = %w{ th st nd rd th th th th th th }
+      sufix_index = @product_count / 10 == 1 ? 0 : @product_count % 10
+      ordinal_string = @product_count.to_s + sufix[sufix_index]
+      "#{@percents_discount}% off of every after the #{ordinal_string}"
     end
   end
 
