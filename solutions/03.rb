@@ -161,7 +161,7 @@ module Coupon
     end
     
     def discount(total) 
-      @percent /("100".to_d) * total 
+      @percent / ("100".to_d) * total 
     end
     
     def print 
